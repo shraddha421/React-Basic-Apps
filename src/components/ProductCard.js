@@ -1,8 +1,10 @@
-export function ProductCard({product, background="slategray",...restProps}) {
+export function ProductCard({product, background="slategray",onPurchase,...restProps}) {
+
   
   const listStyle={
     listStyle:'none',padding:0
-  } 
+  }
+
 
   return (
       <article style={{border: "1px solid white", padding:"16px", textAlign:"center", background, width:"100%"}}>
@@ -18,7 +20,7 @@ export function ProductCard({product, background="slategray",...restProps}) {
           <li>{product.specification[1]}</li>
           <li>{product.specification[2]}</li>
         </ul>
-        <button>Buy (From $999)</button>
+        <button onClick={()=> onPurchase(product)}>Buy (From $999)</button>
       </article>
     );
   }
