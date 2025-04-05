@@ -1,8 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import "./App.css";
 import { ProductCard } from "./components/ProductCard";
 import { ProductList } from "./components/ProductList";
-
+import { ProductFilter } from "./components/ProductFilter";
 function App() {
   const products = [
     {
@@ -39,9 +39,25 @@ function App() {
       price: 399,
     },
   ];
+  const [filter, setFilter]=useState({
+    price:{
+    min:250,
+    max:999
+    },
+    other:"other filters"
+  })
   function handlePurchase(product) {
     console.log(product);
     alert(`You clicked on ${product.title} which cost $${product.price}`);
+  }
+  function handleFilter(key,value){
+    setFilter((prevstate)=>({
+      ...prevstate,
+      price:{
+        ...prevstate.price,
+      [key]:value
+      }
+    }))
   }
 
   return (
@@ -58,10 +74,10 @@ function App() {
           />
         ))}
       </ProductList>
-      <h2>Items that cost less than 500</h2>
+      <ProductFilter filter={filter} handleFilter={handleFilter}/>
       <ul>
         {products
-          .filter(({ price }) => price < 500)
+          .filter(({ price }) => price >=filter.price.min && price <=filter.price.max )
           .map(({ title, price }) => (
             <Fragment key={title}>
             <hr style={{border:"1px solid white"}}/>
