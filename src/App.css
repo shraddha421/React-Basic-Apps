@@ -3,3 +3,11 @@
   margin: 0 auto;
   padding: 64px 16px 16px;
 }
+
+.Productcard{
+  border: 1px solid white;
+  padding: 16px;
+  text-align: center;
+  background-color: slategray;
+  width: 100%;
+}

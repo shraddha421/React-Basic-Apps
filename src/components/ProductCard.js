@@ -1,3 +1,5 @@
+import "../App.css";
+
 export function ProductCard({
   product,
   background = "slategray",
@@ -21,15 +23,7 @@ export function ProductCard({
   }
 
   return (
-    <article
-      style={{
-        border: "1px solid white",
-        padding: "16px",
-        textAlign: "center",
-        background,
-        width: "100%",
-      }}
-    >
+    <article className="Productcard" >
       <h2>{product.title}</h2>
       <img src={product.imageSrc} alt={product.title} {...restProps} />
       <p>Specification:</p>
