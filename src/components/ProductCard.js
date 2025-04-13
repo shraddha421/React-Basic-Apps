@@ -1,9 +1,12 @@
 import "../App.css";
 import { useState } from "react";
+import styles from './ProductCard.module.css';
 export function ProductCard({
   product,
   background = "slategray",
+  isFavorite,
   onPurchase,
+  onFavorite,
   ...restProps
 }) {
   const listStyle = {
@@ -37,7 +40,13 @@ export function ProductCard({
   }
 
   return (
-    <article className="Productcard" >
+    <article className={styles.Container} >
+       <button
+        className={styles.Favorite}
+        onClick={() => onFavorite(product.id)}
+      >
+        {isFavorite ? "❤️" : "🤍"}
+      </button>
       <h2>{product.title}</h2>
       <img src={product.imageSrc} alt={product.title} {...restProps} />
       <p>Specification:</p>

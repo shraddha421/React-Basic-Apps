@@ -3,9 +3,11 @@ import "./App.css";
 import { ProductCard } from "./components/ProductCard";
 import { ProductList } from "./components/ProductList";
 import { ProductFilter } from "./components/ProductFilter";
+import styles from "./App.module.css";
 function App() {
   const products = [
     {
+      id:1,
       imageSrc: "images/iphone.png",
       title: "iPhone 15 Pro",
       specification: [
@@ -17,6 +19,7 @@ function App() {
       price: 999,
     },
     {
+      id:2,
       imageSrc: "images/airpods.png",
       title: "AirPods Pro 2",
       specification: [
@@ -28,6 +31,7 @@ function App() {
       price: 249,
     },
     {
+      id:3,
       imageSrc: "images/apple-watch.png",
       title: "Apple Watch 9",
       specification: [
@@ -46,6 +50,7 @@ function App() {
     },
     other:"other filters"
   })
+  const [favorites, setFavorites]=useState([]);
   function handlePurchase(product) {
     console.log(product);
     alert(`You clicked on ${product.title} which cost $${product.price}`);
@@ -59,9 +64,17 @@ function App() {
       }
     }))
   }
+  function onFavorite(id){
+    if(favorites.includes(id))
+    {
+      setFavorites((prevstate)=> prevstate.filter((productId)=> productId!==id))
+    }else{
+      setFavorites((prevFavotites) => [...prevFavotites, id]);    }
+  }
+
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <ProductList>
         {products.map((product) => (
           <ProductCard
@@ -70,7 +83,9 @@ function App() {
             height="60px"
             background="darkolivegreen"
             product={product}
+            isFavorite={favorites.includes(product.id)}
             onPurchase={handlePurchase}
+            onFavorite={onFavorite}
           />
         ))}
       </ProductList>
